@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Wedding Invitation | Saranya & Pachaiyappan</title>
+    <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Montserrat:wght@300;400;600&family=Libre+Baskerville:ital@1&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --rose-petal: #d6709b; 
+            --temple-teal: #7fb3bd; 
+            --deep-text: #4a3728;
+            --glass: rgba(255, 255, 255, 0.4);
+            --wa-green: #25D366;
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
+
+        body, html {
+            height: 100%;
+            font-family: 'Montserrat', sans-serif;
+            color: var(--deep-text);
+            background-color: #fdfaf6;
+            overflow: hidden;
+        }
+
+        .section {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            display: flex; justify-content: center; align-items: center; text-align: center;
+            opacity: 0; visibility: hidden;
+            transition: opacity 0.7s ease;
+            background-image: url('bg.jpg');
+            background-size: cover; background-position: center;
+            padding: 20px;
+        }
+
+        .active { opacity: 1; visibility: visible; z-index: 10; }
+
+        .reveal { animation: fadeInUp 1s cubic-bezier(0.2, 0.8, 0.2, 1) both; }
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(25px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .card {
+            background: var(--glass);
+            padding: 35px 22px;
+            border-radius: 25px;
+            box-shadow: 0 15px 40px rgba(0,0,0,0.1);
+            max-width: 400px; width: 100%;
+            border: 1px solid rgba(214, 112, 155, 0.2);
+            backdrop-filter: blur(5px);
+        }
+
+        h1 { font-family: 'Great Vibes', cursive; font-size: 3rem; color: var(--rose-petal); }
+        .quote { font-family: 'Libre Baskerville', serif; font-style: italic; font-size: 0.8rem; color: #888; margin: 15px 0; line-height: 1.5; }
+        
+        .couple-names { font-family: 'Libre Baskerville', serif; font-size: 1.8rem; color: var(--temple-teal); font-weight: bold; }
+
+        .family-grid {
+            display: grid; grid-template-columns: 1fr 1fr; gap: 15px;
+            margin: 20px 0; padding: 15px 0;
+            border-top: 1px solid #eee; border-bottom: 1px solid #eee;
+        }
+        .family-label { font-size: 0.6rem; text-transform: uppercase; letter-spacing: 1.5px; color: var(--rose-petal); font-weight: 600; }
+        
+        /* Updated vertical format styling */
+        .family-names { 
+            font-size: 0.85rem; 
+            font-weight: 600; 
+            line-height: 1.8; 
+            margin-top: 5px; 
+            color: #555; 
+        }
+
+        .btn {
+            border: none; border-radius: 12px; cursor: pointer;
+            font-weight: 600; text-decoration: none;
+            display: flex; align-items: center; justify-content: center;
+            padding: 16px; transition: all 0.2s ease; width: 100%; margin-top: 12px;
+            font-size: 0.85rem; letter-spacing: 1px;
+        }
+
+        .btn:active { transform: scale(0.96); filter: brightness(0.9); }
+
+        .btn-primary { background: var(--temple-teal); color: white; }
+        .btn-wa { background: var(--wa-green); color: white; }
+        .btn-exit { background: #f8f8f8; color: #666; border: 1px solid #ddd; }
+
+        .lotus-pulse { font-size: 80px; animation: pulse 2.5s infinite; cursor: pointer; }
+        @keyframes pulse {
+            0% { transform: scale(1); filter: drop-shadow(0 0 0px var(--rose-petal)); }
+            50% { transform: scale(1.05); filter: drop-shadow(0 0 15px var(--rose-petal)); }
+            100% { transform: scale(1); }
+        }
+
+        .date-badge { background: #f4f9fa; padding: 12px; border-radius: 15px; margin: 15px 0; border: 1px solid #e0eff2; }
+    </style>
+</head>
+<body>
+
+    <audio id="bgMusic" loop>
+        <source src="song.mp3" type="audio/mpeg">
+    </audio>
+
+    <section id="p1" class="section active">
+        <div class="card reveal">
+            <h1>Welcome</h1>
+            <p style="margin-top: 10px; font-size: 0.9rem;">To a celebration of love and togetherness.</p>
+            <input type="text" id="gInput" placeholder="Enter Your Name" style="width:100%; padding:15px; margin:25px 0; border:1.5px solid var(--temple-teal); border-radius:12px; text-align:center; outline:none;">
+            <button class="btn btn-primary" onclick="toEnvelope()">Unlock Invitation</button>
+        </div>
+    </section>
+
+    <section id="p2" class="section">
+        <div class="reveal" onclick="toInvite()">
+            <div class="lotus-pulse">🪷</div>
+            <p style="margin-top:25px; font-weight:600; color:var(--rose-petal); letter-spacing: 3px; font-size: 0.8rem;">TOUCH TO UNVEIL</p>
+        </div>
+    </section>
+
+    <section id="p3" class="section">
+        <div class="card reveal">
+            <h2 id="gGreet" style="font-size: 0.9rem; color: var(--rose-petal);">Dear Guest,</h2>
+            <p class="quote">"Please join us to celebrate the wedding of
+"</p>
+            
+            <div style="margin: 10px 0;">
+                <span class="couple-names">Saranya</span><br>
+                <span style="font-family: 'Great Vibes'; font-size: 1.8rem; color: var(--rose-petal);">&</span><br>
+                <span class="couple-names">Pachaiyappan</span>
+            </div>
+
+            <div class="family-grid">
+                <div>
+                    <p class="family-label">Daughter of</p>
+                    <p class="family-names">
+                        Mr. Krishnan<br>
+                        &<br>
+                        Mrs. Jayalakshmi
+                    </p>
+                </div>
+                <div>
+                    <p class="family-label">Son of</p>
+                    <p class="family-names">
+                        Mr. Sakthivel<br>
+                        &<br>
+                        Mrs. Vijayalakshmi
+                    </p>
+                </div>
+            </div>
+
+            <div class="date-badge">
+                <p style="font-weight: 600; color: var(--temple-teal); font-size: 1.1rem;">Sunday, May 24th, 2026</p>
+                <p style="font-size: 0.85rem; margin-top: 5px;">6:00pm onwards</p>
+            </div>
+
+            <p style="font-size: 0.8rem; margin-bottom: 12px;">📍 <strong>Sri Srinivasa kalyana Mahal</strong><br>Anchetty Road Denkanikottai</p>
+            
+            <a href="https://www.google.com/maps/search/?api=1&query=Srinivasa+Kalyana+Mahal+Denkanikottai+Krishnagiri" target="_blank" class="btn btn-exit" style="background:white;">📍 View Location Map</a>
+            
+            <div style="display: flex; gap: 10px;">
+                <button class="btn btn-wa" onclick="shareWA()">📱 WhatsApp</button>
+                <button class="btn btn-primary" onclick="nav('p3', 'p4')">Next ➔</button>
+            </div>
+        </div>
+    </section>
+
+    <section id="p4" class="section">
+        <div class="card reveal" id="finalContent">
+            <h1>Save the Date</h1>
+            <p style="margin: 20px 0; font-size: 0.9rem;">We eagerly look forward to your presence and blessings.</p>
+            <button class="btn btn-primary" style="background:#4285F4;" onclick="saveToGCal()">📅 Add to Calendar</button>
+            <button class="btn btn-exit" style="margin-top:20px;" onclick="exitInvitation()">Exit</button>
+        </div>
+        
+        <div id="exitMessage" style="display:none;" class="card reveal">
+            <h1>Thank You</h1>
+            <p>You may now close this window.</p>
+        </div>
+    </section>
+
+    <script>
+        function toEnvelope() {
+            const name = document.getElementById('gInput').value.trim();
+            if(name) {
+                document.getElementById('gGreet').innerText = "Dear " + name + ",";
+                document.getElementById('bgMusic').play().catch(() => {});
+                nav('p1', 'p2');
+            } else { alert("Please enter your name"); }
+        }
+        function toInvite() { nav('p2', 'p3'); }
+        function nav(curr, next) {
+            document.getElementById(curr).classList.remove('active');
+            setTimeout(() => { document.getElementById(next).classList.add('active'); }, 50);
+        }
+        function shareWA() {
+            const text = encodeURIComponent("Namaste! You're invited to Saranya & Pachaiyappan's wedding on May 24th, 2026. View the invite: " + window.location.href);
+    window.open(`https://wa.me/?text=${text}`, '_blank');
+
+        }
+        function saveToGCal() {
+            const url = `https://calendar.google.com/calendar/render?action=TEMPLATE&text=Wedding:+Saranya+%26+Pachaiyappan&dates=20260525T183000/20260525T220000&details=Wedding+Reception&location=Srinivasa+Kalyana+Mahal,+Denkanikottai,+Tamil+Nadu+635107`;
+    window.open(url, '_blank');
+        }
+        function exitInvitation() {
+            document.getElementById('bgMusic').pause();
+            document.getElementById('finalContent').style.display = 'none';
+            document.getElementById('exitMessage').style.display = 'block';
+        }
+    </script>
+</body>
+</html>
